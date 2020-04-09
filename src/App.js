@@ -6,6 +6,39 @@ import { device } from "./devices";
 import "boxicons";
 // use createGlobalStyle from styled-components
 
+export const routes = [
+  {
+    path: "/",
+    exact: true,
+    sidebar: () => <div>home!</div>,
+    main: () => <h2>Home</h2>
+  },
+  {
+    path: "/lists/:slug",
+    sidebar: () => <div>bubblegum!</div>,
+    main: () => <h2>Bubblegum</h2>
+  },
+  {
+    path: "/movie/:imdbId",
+    toolbar: () => <div>toolbar</div>,
+    sidebar: () => <div>shoelaces!</div>,
+    main: () => <h2>Shoelaces</h2>
+  }
+];
+
+export default function App() {
+  const [sidebarVisable, setSidebarVisable] = useState(false);
+  const toggleSidebar = () => setSidebarVisable(!sidebarVisable);
+  return (
+    <StyledApp>
+      <Header toggleSidebar={toggleSidebar} />
+      <Toolbar />
+      <Sidebar isOpen={sidebarVisable} toggleOpen={toggleSidebar} />
+      <Main />
+    </StyledApp>
+  );
+}
+
 const StyledApp = styled.div`
   /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -35,16 +68,3 @@ const StyledApp = styled.div`
     grid-template-rows: 55px 45px 1fr;
   }
 `;
-
-export default function App() {
-  const [sidebarVisable, setSidebarVisable] = useState(false);
-  const toggleSidebar = () => setSidebarVisable(!sidebarVisable);
-  return (
-    <StyledApp>
-      <Header toggleSidebar={toggleSidebar} />
-      <Toolbar />
-      <Sidebar isOpen={sidebarVisable} toggleOpen={toggleSidebar} />
-      <Main />
-    </StyledApp>
-  );
-}

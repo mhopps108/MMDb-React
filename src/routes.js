@@ -6,12 +6,13 @@ export const routes = [
     main: () => <h2>Home</h2>
   },
   {
-    path: "/bubblegum",
+    path: "/lists/:slug",
     sidebar: () => <div>bubblegum!</div>,
     main: () => <h2>Bubblegum</h2>
   },
   {
-    path: "/shoelaces",
+    path: "/movie/:imdbId",
+    toolbar: () => <div>toolbar</div>,
     sidebar: () => <div>shoelaces!</div>,
     main: () => <h2>Shoelaces</h2>
   }
