@@ -30,7 +30,7 @@ const MovieListLayout = styled.div`
 
 export default function Main() {
   let { slug } = useParams();
-
+  slug = slug || "tmdb-popular"; // temp to fill '/' Route
   const listUrl = `https://www.matthewhopps.com/api/list/${slug}/`;
   const [state, setUrl] = useDataApi(listUrl, []);
   const { data, isLoading, isError } = state;

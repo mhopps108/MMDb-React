@@ -6,30 +6,6 @@ import { device } from "./devices";
 import "boxicons";
 // use createGlobalStyle from styled-components
 
-export const routes = [
-  {
-    path: "/",
-    exact: true,
-    toolbar: () => <Toolbar />,
-    sidebar: () => <Sidebar />,
-    main: () => <Main />
-  },
-  {
-    path: "/lists/:slug",
-    toolbar: () => <Toolbar />,
-    sidebar: (sidebarVisable, toggleSidebar) => (
-      <Sidebar isOpen={sidebarVisable} toggleOpen={toggleSidebar} />
-    ),
-    main: () => <Main />
-  },
-  {
-    path: "/movie/:imdbId",
-    toolbar: () => <div>toolbar</div>,
-    sidebar: () => <div>shoelaces!</div>,
-    main: () => <h2>Shoelaces</h2>
-  }
-];
-
 export default function App() {
   const [sidebarVisable, setSidebarVisable] = useState(false);
   const toggleSidebar = () => setSidebarVisable(!sidebarVisable);

@@ -3,6 +3,44 @@ import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 import { device } from "../devices";
 
+const StyledMovieListItem = styled.div`
+  display: flex;
+  padding: 4px;
+  background: #dedede;
+  height: 150px;
+  min-width: 350px;
+  max-width: 400px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+`;
+
+const Poster = styled.div`
+  min-width: 92px;
+  /* height: 138px; */
+  height: 100%;
+  background-image: url(${props => props.url});
+  // objectFit: contain;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+`;
+
+// className="w-100 pl-3 pt-1 d-flex flex-column justify-content-start"
+const Details = styled.div`
+  display: flex;
+`;
+
+const TitleLink = styled.h4`
+  font-size: 1.2rem;
+  color: #555;
+  overflow: hidden;
+  line-height: 1.2em;
+  max-height: 2.4em;
+  white-space: normal;
+`;
+
 function MovieListItem({ movie }) {
   const {
     imdb_id,
@@ -18,48 +56,14 @@ function MovieListItem({ movie }) {
 
   return (
     <>
-      <div
-        className="d-flex p-2 mx-auto"
-        style={{
-          background: "#dedede",
-          height: "150px",
-          minWidth: "350px",
-          maxWidth: "400px",
-          borderRadius: "4px",
-          border: "1px solid rgba(0,0,0,0.2)"
-        }}
-      >
-        <div
-          style={{
-            minWidth: "92px",
-            // height: "138px",
-            height: "100%",
-            backgroundImage: `url(${poster_url})`,
-            // objectFit: "contain",
-            backgroundPosition: "center",
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
-            borderRadius: "4px",
-            border: "1px solid rgba(0,0,0,0.2)"
-          }}
-        />
+      <StyledMovieListItem>
+        <Poster url={poster_url} />
 
         <div className="w-100 pl-3 pt-1 d-flex flex-column justify-content-start">
           <Link to={`/movie/${imdb_id}`}>
-            <h6
-              className="my-2"
-              style={{
-                fontSize: "1.2rem",
-                color: "#555",
-                overflow: "hidden",
-                lineHeight: "1.2em",
-                maxHeight: "2.4em",
-                whiteSpace: "normal"
-              }}
-            >
-              {title}
-            </h6>
+            <TitleLink>{title}</TitleLink>
           </Link>
+
           <div style={{ fontSize: "0.8rem", color: "grey" }}>
             <div className="w-100 d-flex">
               <p className="mb-1 pr-3">{year}</p>
@@ -82,7 +86,7 @@ function MovieListItem({ movie }) {
             </div>
           </div>
         </div>
-      </div>
+      </StyledMovieListItem>
     </>
   );
 }

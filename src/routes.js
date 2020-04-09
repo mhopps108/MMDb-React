@@ -17,3 +17,27 @@ export const routes = [
     main: () => <h2>Shoelaces</h2>
   }
 ];
+
+// export const routes = [
+//   {
+//     path: "/",
+//     exact: true,
+//     toolbar: () => <Toolbar />,
+//     sidebar: () => <Sidebar />,
+//     main: () => <Main />
+//   },
+//   {
+//     path: "/lists/:slug",
+//     toolbar: () => <Toolbar />,
+//     sidebar: (sidebarVisable, toggleSidebar) => (
+//       <Sidebar isOpen={sidebarVisable} toggleOpen={toggleSidebar} />
+//     ),
+//     main: () => <Main />
+//   },
+//   {
+//     path: "/movie/:imdbId",
+//     toolbar: () => <div>toolbar</div>,
+//     sidebar: () => <div>shoelaces!</div>,
+//     main: () => <h2>Shoelaces</h2>
+//   }
+// ];
