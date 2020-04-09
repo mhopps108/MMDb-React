@@ -1,6 +1,9 @@
-import React from "react";
-import styled, { css } from "styled-components/macro";
+import React, { useEffect } from "react";
+import { Link, useRouteMatch, useParams } from "react-router-dom";
+import styled, { css } from "styled-components";
 import { device } from "../devices";
+import { useDataApi } from "../useDataApi";
+import MovieListItem from "./MovieListItem";
 
 const StyledMain = styled.div`
   background-color: lightgray;
@@ -9,13 +12,13 @@ const StyledMain = styled.div`
   overflow: scroll;
 `;
 
-const MovieListItem = styled.div`
-  /* min-width: 333px; */
-  /* max-width: 400px; */
-  height: 150px;
-  border-radius: 5px;
-  background: white;
-`;
+// const MovieListItem = styled.div`
+//   /* min-width: 333px; */
+//   /* max-width: 400px; */
+//   height: 150px;
+//   border-radius: 5px;
+//   background: white;
+// `;
 
 const MovieListLayout = styled.div`
   display: grid;
@@ -26,35 +29,32 @@ const MovieListLayout = styled.div`
 `;
 
 export default function Main() {
+  let { slug } = useParams();
+
+  const listUrl = `https://www.matthewhopps.com/api/list/${slug}/`;
+  const [state, setUrl] = useDataApi(listUrl, []);
+  const { data, isLoading, isError } = state;
+  const { name, source, movie_count, movielistitems } = data;
+
+  useEffect(() => {
+    setUrl(listUrl);
+  }, [slug, listUrl, setUrl]);
+
+  useEffect(() => {
+    console.log(`List state data ${slug}`);
+    console.log(state);
+  }, [state, slug]);
   return (
-    // <BrowserRouter>
-    //     <Switch>
-    //       <Route path={"/lists/:listSlug"}>
-    //         <List />
-    //       </Route>
-    //       <Route path="/lists">
-    //         <Lists />
-    //       </Route>
-    //       <Route path="/movie/:imdbId">
-    //         <MovieDetail />
-    //       </Route>
-    //       <Route path="/search">
-    //         <Search />
-    //       </Route>
-    //       <Route path="/release-dates">
-    //         <ReleaseDates />
-    //       </Route>
-    //       <Route path="/">
-    //         <Home />
-    //       </Route>
-    //     </Switch>
-    //   </BrowserRouter>
     <StyledMain>
-      <MovieListLayout>
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(item => {
-          return <MovieListItem key={item} />;
-        })}
-      </MovieListLayout>
+      {isError && <p>Error</p>}
+      {isLoading && <p>Loading movies...</p>}
+      {!isLoading && data && (
+        <MovieListLayout>
+          {(movielistitems || []).map(movie => (
+            <MovieListItem key={movie.movie.imdb_id} movie={movie.movie} />
+          ))}
+        </MovieListLayout>
+      )}
     </StyledMain>
   );
 }

@@ -10,13 +10,17 @@ export const routes = [
   {
     path: "/",
     exact: true,
-    sidebar: () => <div>home!</div>,
-    main: () => <h2>Home</h2>
+    toolbar: () => <Toolbar />,
+    sidebar: () => <Sidebar />,
+    main: () => <Main />
   },
   {
     path: "/lists/:slug",
-    sidebar: () => <div>bubblegum!</div>,
-    main: () => <h2>Bubblegum</h2>
+    toolbar: () => <Toolbar />,
+    sidebar: (sidebarVisable, toggleSidebar) => (
+      <Sidebar isOpen={sidebarVisable} toggleOpen={toggleSidebar} />
+    ),
+    main: () => <Main />
   },
   {
     path: "/movie/:imdbId",
@@ -30,11 +34,34 @@ export default function App() {
   const [sidebarVisable, setSidebarVisable] = useState(false);
   const toggleSidebar = () => setSidebarVisable(!sidebarVisable);
   return (
+    // <StyledApp>
+    //   <Header toggleSidebar={toggleSidebar} />
+    //   <Toolbar />
+    //   <Sidebar isOpen={sidebarVisable} toggleOpen={toggleSidebar} />
+    //   <Main />
+    // </StyledApp>
+
     <StyledApp>
       <Header toggleSidebar={toggleSidebar} />
-      <Toolbar />
-      <Sidebar isOpen={sidebarVisable} toggleOpen={toggleSidebar} />
-      <Main />
+      <BrowserRouter>
+        <Switch>
+          <Route path={"/lists/:slug"}>
+            <Toolbar />
+            <Sidebar isOpen={sidebarVisable} toggleOpen={toggleSidebar} />
+            <Main />
+          </Route>
+          <Route path="/movie/:imdbId">
+            <Toolbar />
+            <Sidebar isOpen={sidebarVisable} toggleOpen={toggleSidebar} />
+            <Main />
+          </Route>
+          <Route path="/">
+            <Toolbar />
+            <Sidebar isOpen={sidebarVisable} toggleOpen={toggleSidebar} />
+            <Main />
+          </Route>
+        </Switch>
+      </BrowserRouter>
     </StyledApp>
   );
 }
