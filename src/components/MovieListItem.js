@@ -27,9 +27,11 @@ const Poster = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.2);
 `;
 
-// className="w-100 pl-3 pt-1 d-flex flex-column justify-content-start"
+// className="w-100 pl-3 pt-1 "
 const Details = styled.div`
   display: flex;
+  flex-direction: column;
+  justify-content: start;
 `;
 
 const TitleLink = styled.h4`
@@ -58,8 +60,7 @@ function MovieListItem({ movie }) {
     <>
       <StyledMovieListItem>
         <Poster url={poster_url} />
-
-        <div className="w-100 pl-3 pt-1 d-flex flex-column justify-content-start">
+        <Details>
           <Link to={`/movie/${imdb_id}`}>
             <TitleLink>{title}</TitleLink>
           </Link>
@@ -85,7 +86,7 @@ function MovieListItem({ movie }) {
                 })}
             </div>
           </div>
-        </div>
+        </Details>
       </StyledMovieListItem>
     </>
   );
