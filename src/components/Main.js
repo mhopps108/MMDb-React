@@ -12,14 +12,6 @@ const StyledMain = styled.div`
   overflow: scroll;
 `;
 
-// const MovieListItem = styled.div`
-//   /* min-width: 333px; */
-//   /* max-width: 400px; */
-//   height: 150px;
-//   border-radius: 5px;
-//   background: white;
-// `;
-
 const MovieListLayout = styled.div`
   display: grid;
   grid-gap: 10px;
