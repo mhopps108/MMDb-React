@@ -35,7 +35,8 @@ const DetailsWrap = styled.div`
   flex-direction: column;
   justify-content: start;
   width: 100%;
-  margin: 10px;
+  /* margin: 10px; */
+  padding: 8px;
 `;
 
 const Title = styled.h6`
@@ -66,7 +67,7 @@ const DetailRow = styled.div`
 `;
 
 const DetailItem = styled.p`
-  padding-right: 8px;
+  padding-right: 12px;
 `;
 
 function MovieListItem({ movie }) {
