@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link, useRouteMatch, useParams } from "react-router-dom";
-import styled, { css } from "styled-components";
+import styled, { css } from "styled-components/macro";
 import { device } from "../devices";
 import { useDataApi } from "../useDataApi";
 import MovieListItem from "./MovieListItem";

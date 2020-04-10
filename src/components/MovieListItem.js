@@ -1,21 +1,23 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import styled, { css } from "styled-components";
+import styled, { css } from "styled-components/macro";
 import { device } from "../devices";
 
 const StyledMovieListItem = styled.div`
   display: flex;
   padding: 4px;
-  background: #dedede;
-  height: 150px;
-  min-width: 350px;
+  background: white;
+  /* height: 150px; */
+  height: 125px;
+  /* min-width: 350px; */
   max-width: 400px;
   border-radius: 4px;
   border: 1px solid rgba(0, 0, 0, 0.2);
 `;
 
 const Poster = styled.div`
-  min-width: 92px;
+  /* min-width: 92px; */
+  min-width: 80px;
   /* height: 138px; */
   height: 100%;
   background-image: url(${props => props.url});
@@ -28,19 +30,43 @@ const Poster = styled.div`
 `;
 
 // className="w-100 pl-3 pt-1 "
-const Details = styled.div`
+const DetailsWrap = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: start;
+  width: 100%;
+  margin: 10px;
 `;
 
-const TitleLink = styled.h4`
-  font-size: 1.2rem;
+const Title = styled.h6`
+  font-size: 1.1rem;
   color: #555;
   overflow: hidden;
   line-height: 1.2em;
   max-height: 2.4em;
   white-space: normal;
+  margin-bottom: 10px;
+  & a {
+    text-decoration: none;
+    color: #222;
+  }
+`;
+
+const Details = styled.div`
+  display: flex;
+  flex-direction: column;
+  color: grey;
+  font-size: 0.8rem;
+`;
+
+const DetailRow = styled.div`
+  display: flex;
+  /* padding: 8px 0; */
+  margin-bottom: 8px;
+`;
+
+const DetailItem = styled.p`
+  padding-right: 8px;
 `;
 
 function MovieListItem({ movie }) {
@@ -51,7 +77,6 @@ function MovieListItem({ movie }) {
     runtime,
     certification,
     imdb_rating_avg,
-    imdb_rating_count,
     genres,
     poster_url
   } = movie;
@@ -60,33 +85,31 @@ function MovieListItem({ movie }) {
     <>
       <StyledMovieListItem>
         <Poster url={poster_url} />
-        <Details>
-          <Link to={`/movie/${imdb_id}`}>
-            <TitleLink>{title}</TitleLink>
-          </Link>
-
-          <div style={{ fontSize: "0.8rem", color: "grey" }}>
-            <div className="w-100 d-flex">
-              <p className="mb-1 pr-3">{year}</p>
-              {/* <p className="mb-1">•</p> */}
-              <p className="mb-1 pr-3">
+        <DetailsWrap>
+          <Title>
+            <Link to={`/movie/${imdb_id}`}>{title}</Link>
+          </Title>
+          <Details>
+            <DetailRow>
+              <DetailItem>{year}</DetailItem>
+              <DetailItem>
                 {runtime}
                 <small> mins</small>
-              </p>
-              <p className="mb-1 pr-3">{certification}</p>
-              <p className="mb-1">
+              </DetailItem>
+              <DetailItem>{certification}</DetailItem>
+              <DetailItem>
                 {imdb_rating_avg}
                 <small> /10</small>
-              </p>
-            </div>
-            <div className="d-flex">
+              </DetailItem>
+            </DetailRow>
+            <DetailRow>
               {genres &&
                 genres.map(genre => {
-                  return <div className="pr-3">{genre}</div>;
+                  return <DetailItem>{genre}</DetailItem>;
                 })}
-            </div>
-          </div>
-        </Details>
+            </DetailRow>
+          </Details>
+        </DetailsWrap>
       </StyledMovieListItem>
     </>
   );
