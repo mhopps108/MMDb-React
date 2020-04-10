@@ -7,6 +7,7 @@ const StyledToolbar = styled.div`
   grid-area: toolbar;
   position: sticky;
   top: 55px;
+  /* min-height: 100px; */
   display: flex;
 `;
 
