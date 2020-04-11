@@ -12,8 +12,8 @@ export const routes = [
   },
   {
     path: "/movie/:imdbId",
-    toolbar: () => <div>toolbar</div>,
-    sidebar: () => <div>shoelaces!</div>,
-    main: () => <h2>Shoelaces</h2>
+    toolbar: () => <div>Hide</div>,
+    sidebar: () => <div>Show?</div>,
+    main: () => <h2>All the movie details</h2>
   }
 ];
