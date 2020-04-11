@@ -7,6 +7,7 @@ export const routes = [
   },
   {
     path: "/lists/:slug",
+    exact: false,
     sidebar: () => <div>bubblegum!</div>,
     main: () => <h2>Bubblegum</h2>
   },
