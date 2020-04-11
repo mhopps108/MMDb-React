@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
-import { Header, Sidebar, Toolbar, Main } from "./components";
+import { Header, Sidebar, Toolbar, Main, MovieDetail } from "./components";
 import styled, { css } from "styled-components";
 import { device } from "./devices";
 import "boxicons";
@@ -27,9 +27,9 @@ export default function App() {
             <Main />
           </Route>
           <Route path="/movie/:imdbId">
-            <Toolbar />
-            <Sidebar isOpen={sidebarVisable} toggleOpen={toggleSidebar} />
-            <Main />
+            {/* <Toolbar />
+            <Sidebar isOpen={sidebarVisable} toggleOpen={toggleSidebar} /> */}
+            <MovieDetail />
           </Route>
           <Route path="/">
             <Toolbar />
